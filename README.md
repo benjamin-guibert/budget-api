@@ -77,8 +77,8 @@ See the [`Makefile`](Makefile) for available commands.
 [Docker](https://www.docker.com) |
 [GORM](https://gorm.io/index.html)
 [mux](https://github.com/gorilla/mux) |
-[godotenv](https://github.com/joho/godotenv)
-[validator](https://github.com/go-playground/validator)
+[godotenv](https://github.com/joho/godotenv) |
+[validator](https://github.com/go-playground/validator) |
 
 ## Release History
 
