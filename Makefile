@@ -15,7 +15,6 @@ db-restart:
 db-create:
 	docker exec -it budget_database_dev createdb --username=postgres --owner=postgres budget
 
-
 # Drops the database.
 db-drop:
 	docker exec -it budget_database_dev dropdb --username=postgres budget -f
@@ -24,6 +23,10 @@ db-drop:
 db-reset:
 	make db-drop
 	make db-create
+
+# Seeds the database.
+db-seed:
+	go run . --seed
 
 # Create the test database.
 db-test-create:
@@ -42,4 +45,4 @@ db-test-reset:
 test:
 	go test ./...
 
-.PHONY: db-start db-stop db-restart db-create db-drop db-reset db-test-create db-test-drop db-test-reset test
+.PHONY: db-start db-stop db-restart db-create db-drop db-reset db-seed db-test-create db-test-drop db-test-reset test

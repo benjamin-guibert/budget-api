@@ -1,0 +1,34 @@
+name: Test
+
+on: [push]
+
+jobs:
+  test:
+    name: Test the code
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout the repository
+        uses: actions/checkout@v2
+
+      - name: Get Go version
+        id: go-version
+        run: echo "::set-output name=GO_VERSION::$(cat .go-version)"
+
+      - name: Setup Go ${{ steps.go-version.outputs.GO_VERSION }}
+        uses: actions/setup-go@v2
+        with:
+          go-version: ${{ steps.go-version.outputs.GO_VERSION }}
+
+      - run: go version
+
+      - name: Install dependencies
+        run: go get .
+
+      - name: Setup database
+        run: |
+          docker-compose up -d database
+          docker exec -it budget_database_dev createdb --username=postgres --owner=postgres budget_test
+
+      - name: Run tests
+        run: go test ./... -v
