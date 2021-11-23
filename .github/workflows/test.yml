@@ -1,0 +1,36 @@
+name: Test
+env:
+  GO_ENV: test
+  COMPOSE_INTERACTIVE_NO_CLI: 1
+
+on: [push]
+
+jobs:
+  test:
+    name: Test the code
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout the repository
+        uses: actions/checkout@v2
+
+      - name: Get Go version
+        id: go-version
+        run: echo "::set-output name=GO_VERSION::$(cat .go-version)"
+
+      - name: Setup Go ${{ steps.go-version.outputs.GO_VERSION }}
+        uses: actions/setup-go@v2
+        with:
+          go-version: ${{ steps.go-version.outputs.GO_VERSION }}
+
+      - name: Check Go version
+        run: go version
+
+      - name: Install dependencies
+        run: go get .
+
+      - name: Setup database
+        run: docker-compose -f docker-compose.test.yml up -d database
+
+      - name: Run tests
+        run: go test ./... -v
