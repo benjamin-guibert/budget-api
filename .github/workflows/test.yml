@@ -30,10 +30,7 @@ jobs:
         run: go get .
 
       - name: Setup database
-        run: |
-          docker-compose up -d database
-          sleep 1
-          docker exec -i budget_database_dev createdb --username=postgres --owner=postgres budget_test
+        run: docker-compose up -f docker-compose.test.yml -d database
 
       - name: Run tests
         run: go test ./... -v

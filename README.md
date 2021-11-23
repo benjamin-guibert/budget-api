@@ -34,10 +34,9 @@ go get .
 cp .env.sample .env
 ```
 
-- Create & seed the database, create the test database:
+- seed the database & create the test database:
 
 ```bash
-make db-create
 make db-seed
 make db-test-create
 ```
