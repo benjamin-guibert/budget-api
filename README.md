@@ -4,6 +4,7 @@ Flexible budget management application with monthly adjustment and month-length
 costs splitting (API side).
 
 [![license-shield][]](LICENSE)
+![test-shield][]
 ![last-commit-shield][]
 ![go-version-shield][]
 
@@ -109,3 +110,5 @@ file for details.
 [go-version-shield]: https://img.shields.io/github/go-mod/go-version/benjamin-guibert/budget-api
 [last-commit-shield]:
 https://img.shields.io/github/last-commit/benjamin-guibert/budget-api
+[test-shield]:
+https://img.shields.io/github/workflow/status/benjamin-guibert/budget-api/Test
